@@ -34,11 +34,12 @@ let createCollege = async function (req, res) {
 }
 
 const getCollegeDetails = async function (req, res) {
-   const collegeName = req.query.collegeName;
-   if (!collegeName) {
-      return res.status(400).send({ status: false, msg: "collegeName can't be empty" })
-   }
    try {
+      const collegeName = req.query.collegeName;
+      if (!collegeName) {
+         return res.status(400).send({ status: false, msg: "collegeName can't be empty" })
+      }
+
       const college = await collegeModel.findOne({ name: collegeName });
       if (!college) {
          return res.status(400).send({ status: false, msg: "College not found" })
@@ -46,14 +47,8 @@ const getCollegeDetails = async function (req, res) {
       const interns = await InternModel.find({
          collegeID: college._id
       }, { _id: 1, name: 1, mobile: 1, email: 1 }); // projection
-      return res.status(200).send({
-         data: {
-            name: college.name,
-            fullname: college.fullname,
-            logolink: college.logolink,
-            interns,
-         }
-      })
+      return res.status(200).send({data: {college,interns}})
+      
    } catch (error) {
       return res.status(500).send({ status: false, msg: "Something went wrong" })
    }
