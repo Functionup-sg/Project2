@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ObjectId =mongoose.Schema.Type.ObjectId
+const ObjectId =mongoose.Types.ObjectId
 
 const internSchema = new mongoose.Schema({
     name: {type: String,required: true},
@@ -8,9 +8,9 @@ const internSchema = new mongoose.Schema({
 
     mobile:{type:Number, unique:true, required:true},
 
-    collage_Id:{type:ObjectId,ref:"college", required:true},
+    collegeID:{type:ObjectId,ref:"college", required:true},
 
-    isDeleted: {type: boolean, default: false}
+    isDeleted: {type: Boolean, default: false}
     
 }, { timestamps: true });
 
