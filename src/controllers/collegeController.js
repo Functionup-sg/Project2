@@ -1,7 +1,10 @@
-
 let collegeModel = require('../Models/CollegeModel')
 const InternModel = require('../Models/InternModel')
 let { isValidreqbody, isValid, isValidName, isValidFName, isValidUrl } = require('../Validator/validation')
+
+
+
+//_________________CREATE API FOR COLLEGE_________________
 
 let createCollege = async function (req, res) {
 
@@ -33,9 +36,13 @@ let createCollege = async function (req, res) {
    }
 }
 
+
+//_________________GET API FOR DEATAILS OF COLLEGE WITH INTERNS_________________
 const getCollegeDetails = async function (req, res) {
    try {
       const collegeName = req.query.collegeName;
+
+
       if (!collegeName) {
          return res.status(400).send({ status: false, msg: "collegeName can't be empty" })
       }

@@ -2,6 +2,10 @@ const collegeModel = require('../Models/CollegeModel')
 const internModel = require('../Models/InternModel')
 const { isValidreqbody, isValid, isValidName, isValidMobile, isValidEmail } = require('../Validator/validation')
 
+
+
+//_________________ CREATE API FOR INTERNS_________________
+
 const createInterns = async function (req, res) {
     try {
         
