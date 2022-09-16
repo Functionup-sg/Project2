@@ -32,6 +32,12 @@ const createInterns = async function (req, res) {
 
         if (!isValidEmail(email)) {return res.status(400).send({ status: false, msg: "please provide a valid email" })}
 
+         let findintern= await internModel.findOne({email:email})
+         if(findintern) {return res.status(400).send({ status: false, msg: " email already exists" })}
+
+         let checkuniqueNo = await internModel.findOne({ mobile: mobile })
+         if (checkuniqueNo) {return res.status(400).send({ status: false, msg: "Pls Enter Unique Mobile No." })}
+
         const createdData = await internModel.create({ name, mobile, email, collegeID: college._id })
         return res.status(200).send({ data: createdData })
 
@@ -41,4 +47,4 @@ const createInterns = async function (req, res) {
     }
 } 
 
-module.exports.createInterns = createInterns
+module.exports.createInterns = createInterns 

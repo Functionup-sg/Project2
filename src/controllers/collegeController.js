@@ -15,10 +15,13 @@ let createCollege = async function (req, res) {
 
       if (!isValidreqbody(data)) {
          return res.status(400).send({ status: false, msg: " PLEASE PROVIDE DATA" })
-      }
+      } 
       if (!isValid(name)) { return res.status(400).send({ status: false, msg: " NAME MUST BE REQUIRED" }) }
       if (!isValidName(name)) { return res.status(400).send({ status: false, msg: " PLEASE PROVIDE VALID NAME" }) }
 
+      let findcollege= await collegeModel.findOne({name:data.name})
+      if(findcollege)   return res.status(400).send({ status: false, msg: " NAME ALREADY EXISTS" })
+  
       if (!isValid(fullname)) { return res.status(400).send({ status: false, msg: " FULLNAME MUST BE REQUIRED" }) }
       if (!isValidFName(fullname)) { return res.status(400).send({ status: false, msg: " PLEASE PROVIDE VALID FULLNAME" }) }
 
@@ -51,7 +54,7 @@ const getCollegeDetails = async function (req, res) {
       if (!college) {
          return res.status(400).send({ status: false, msg: "College not found" })
       }
-      const interns = await InternModel.find({
+      const interns = await InternModel.find({  
          collegeID: college._id
       }, { _id: 1, name: 1, mobile: 1, email: 1 }); // projection
       return res.status(200).send({data: {college,interns}})
