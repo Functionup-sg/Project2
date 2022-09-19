@@ -4,9 +4,9 @@ const collegeSchema = new mongoose.Schema({
 
     name: {type: String, required: true,unique: true},
 
-    fullname: {type:String,required:true},
+    fullName: {type:String, required:true},
 
-    logolink:  { type: String,required:true},
+    logoLink:  { type: String, required:true},
 
     isDeleted: {type: Boolean,default: false}
     
